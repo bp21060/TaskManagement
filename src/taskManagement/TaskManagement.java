@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class TaskManagement extends JFrame {
 
@@ -43,22 +44,21 @@ public class TaskManagement extends JFrame {
 		setBounds(100, 100, 450, 300);
 		JPanel p = new JPanel();
 		GridLayout layout = new GridLayout(1, 2);
-		layout.setHgap(150);
+		layout.setHgap(100);
 		Container contentPane = getContentPane();
 
 		//追加、削除ボタン
-		JButton addButton = new JButton("追加");
-		JButton deleteButton = new JButton("削除");
+		JButton addButton = new JButton("課題の追加");
+		JButton deleteButton = new JButton("完了した課題の削除");
 
 		p.setLayout(layout);
 		p.add(addButton);
 		p.add(deleteButton);
 
-		contentPane.add(p, BorderLayout.PAGE_END);
-
 		//タスクの表示
-		GroupLayout layout2 = new GroupLayout(contentPane);
-		contentPane.setLayout(layout2);
+		JPanel p2 = new JPanel();
+		GroupLayout layout2 = new GroupLayout(p2);
+		p2.setLayout(layout2);
 
 		//間隔開ける
 		layout2.setAutoCreateGaps(true);
@@ -104,6 +104,13 @@ public class TaskManagement extends JFrame {
 
 		layout2.setVerticalGroup(vGroup);
 
+		//課題一覧パネルにスクロールを追加
+		JScrollPane taskScroll = new JScrollPane(p2);
+		taskScroll.getVerticalScrollBar().setUnitIncrement(20);
+
+		//削除追加ボタンパネルと課題一覧パネルをcontentPaneに追加
+		contentPane.add(p, BorderLayout.PAGE_END);
+		contentPane.add(taskScroll, BorderLayout.CENTER);
 	}
 
 }
