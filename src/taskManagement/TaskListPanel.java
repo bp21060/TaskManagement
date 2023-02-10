@@ -1,5 +1,10 @@
 package taskManagement;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +15,20 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
-public class TaskListPanel {
+public class TaskListPanel extends JPanel implements ActionListener {
 
-	public JPanel MakePanel() {
-		//タスクの表示
+	JPanel cardLayoutPanel;
+	CardLayout cardLayout;
+
+	public TaskListPanel(JPanel cardLayoutPanel, CardLayout cardLayout) {
+
+		//カードレイアウトを初期設定する
+		this.cardLayoutPanel = cardLayoutPanel;
+		this.cardLayout = cardLayout;
+
+		//タスク一覧タスクの表示
 		JPanel p2 = new JPanel();
 		GroupLayout layout2 = new GroupLayout(p2);
 		p2.setLayout(layout2);
@@ -63,8 +77,36 @@ public class TaskListPanel {
 
 		layout2.setVerticalGroup(vGroup);
 
-		return p2;
+		//スクロールの追加
+		JScrollPane taskScroll = new JScrollPane(p2);
+		taskScroll.getVerticalScrollBar().setUnitIncrement(20);
 
+		//追加、削除ボタンのパネルを追加
+		JPanel p = new JPanel();
+		GridLayout layout = new GridLayout(1, 2);
+		layout.setHgap(100);
+
+		JButton addButton = new JButton("課題の追加");
+		addButton.addActionListener(this);
+		addButton.setActionCommand("taskAdd");
+
+		JButton deleteButton = new JButton("完了した課題の削除");
+		p.setLayout(layout);
+		p.add(addButton);
+		p.add(deleteButton);
+
+		//全体の画面を表示
+		this.setLayout(new BorderLayout());
+		this.add(taskScroll, BorderLayout.CENTER);
+		this.add(p, BorderLayout.PAGE_END);
+	}
+
+	//ボタンがクリックされた時の操作
+	@Override
+	public void actionPerformed(ActionEvent actionEvent) {
+		String command = actionEvent.getActionCommand();
+
+		cardLayout.show(cardLayoutPanel, command);
 	}
 
 }
