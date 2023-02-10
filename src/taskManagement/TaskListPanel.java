@@ -29,9 +29,9 @@ public class TaskListPanel extends JPanel implements ActionListener {
 		this.cardLayout = cardLayout;
 
 		//タスク一覧タスクの表示
-		JPanel p2 = new JPanel();
-		GroupLayout layout2 = new GroupLayout(p2);
-		p2.setLayout(layout2);
+		JPanel mainPanel = new JPanel();
+		GroupLayout layout2 = new GroupLayout(mainPanel);
+		mainPanel.setLayout(layout2);
 
 		//間隔開ける
 		layout2.setAutoCreateGaps(true);
@@ -78,11 +78,11 @@ public class TaskListPanel extends JPanel implements ActionListener {
 		layout2.setVerticalGroup(vGroup);
 
 		//スクロールの追加
-		JScrollPane taskScroll = new JScrollPane(p2);
+		JScrollPane taskScroll = new JScrollPane(mainPanel);
 		taskScroll.getVerticalScrollBar().setUnitIncrement(20);
 
 		//追加、削除ボタンのパネルを追加
-		JPanel p = new JPanel();
+		JPanel operationButton = new JPanel();
 		GridLayout layout = new GridLayout(1, 2);
 		layout.setHgap(100);
 
@@ -91,14 +91,14 @@ public class TaskListPanel extends JPanel implements ActionListener {
 		addButton.setActionCommand("taskAdd");
 
 		JButton deleteButton = new JButton("完了した課題の削除");
-		p.setLayout(layout);
-		p.add(addButton);
-		p.add(deleteButton);
+		operationButton.setLayout(layout);
+		operationButton.add(addButton);
+		operationButton.add(deleteButton);
 
 		//全体の画面を表示
 		this.setLayout(new BorderLayout());
 		this.add(taskScroll, BorderLayout.CENTER);
-		this.add(p, BorderLayout.PAGE_END);
+		this.add(operationButton, BorderLayout.PAGE_END);
 	}
 
 	//ボタンがクリックされた時の操作
