@@ -2,6 +2,8 @@ package taskManagement;
 
 import java.awt.Label;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -10,28 +12,75 @@ import javax.swing.border.EtchedBorder;
 public class TaskAddPanel extends JPanel {
 
 	public TaskAddPanel() {
-		/*
-		GridLayout layout = new GridLayout(3, 1);
-		this.setLayout(layout);
-		layout.setVgap(5);
-		layout.setHgap(20);
-		*/
 
+		//タスク一覧タスクの表示
+		JPanel mainPanel = new JPanel();
+		GroupLayout layout = new GroupLayout(this);
+		this.setLayout(layout);
+
+		//間隔開ける
+		layout.setAutoCreateGaps(false);
+		layout.setAutoCreateContainerGaps(true);
+
+		//コンポーネント
 		Label title = new Label("課題の追加");
-		JTextField nameField = new JTextField("課題名", 15);
-		JTextField yearField = new JTextField("年(西暦)", 4);
-		JTextField monthField = new JTextField("月", 2);
-		JTextField dayField = new JTextField("日", 2);
-		JTextArea detailField = new JTextArea("詳細", 3, 20);
+		Label nameLabel = new Label("名前");
+		JTextField nameField = new JTextField(15);
+		Label yearLabel = new Label("年");
+		JTextField yearField = new JTextField(4);
+		Label monthLabel = new Label("月");
+		JTextField monthField = new JTextField(2);
+		Label dayLabel = new Label("日");
+		JTextField dayField = new JTextField(2);
+		Label detaiLabel = new Label("詳細");
+		JTextArea detailField = new JTextArea(4, 20);
 		detailField.setLineWrap(true);
 		detailField.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 
-		this.add(title);
-		this.add(nameField);
-		this.add(yearField);
-		this.add(monthField);
-		this.add(dayField);
-		this.add(detailField);
+		//水平グループ
+		layout.setHorizontalGroup(
+				layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup()
+								.addComponent(title)
+								.addComponent(nameLabel)
+								.addComponent(nameField)
+								.addGroup(layout.createSequentialGroup()
+										.addGroup(layout.createParallelGroup()
+												.addComponent(yearLabel)
+												.addComponent(yearField))
+										.addGap(10, 10, 10)
+										.addGroup(layout.createParallelGroup()
+												.addComponent(monthLabel)
+												.addComponent(monthField))
+										.addGap(10, 10, 10)
+										.addGroup(layout.createParallelGroup()
+												.addComponent(dayLabel)
+												.addComponent(dayField))
+										.addGap(40, 40, 40))
+								.addComponent(detaiLabel)
+								.addComponent(detailField)));
+
+		//垂直グループ
+		layout.setVerticalGroup(
+				layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(title))
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(nameLabel))
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(nameField))
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(yearLabel)
+								.addComponent(monthLabel)
+								.addComponent(dayLabel))
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(yearField)
+								.addComponent(monthField)
+								.addComponent(dayField))
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(detaiLabel))
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(detailField)));
 	}
 
 }
