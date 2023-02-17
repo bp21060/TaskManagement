@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -110,7 +111,32 @@ public class TaskAddPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TaskManagement.taskList.add(null);
+				//入力内容からタスクを読み込む
+				String nameString = nameField.getText();
+				String yearString = yearField.getText();
+				String monthString = monthField.getText();
+				String dayString = dayField.getText();
+				String detailString = detailField.getText();
+				//入力内容が適切かどうか判断
+				StringBuilder stringCheck = new StringBuilder();
+				stringCheck.append(yearString);
+				stringCheck.append(monthString);
+				stringCheck.append(dayString);
+				String digitCheckString = stringCheck.toString();
+				boolean digitCheck = true;
+				for (int i = 0; i < digitCheckString.length(); i++) {
+					if (!Character.isDigit(digitCheckString.charAt(i))) {
+						digitCheck = false;
+					}
+				}
+				if (nameString.contains(",")) {
+					JOptionPane.showMessageDialog(addButton, "タイトルに「,」を含んでいます", "Error", JOptionPane.ERROR_MESSAGE);
+				} else if (!digitCheck) {
+					JOptionPane.showMessageDialog(addButton, "期限年月日が適切な数字ではありません", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
+							Integer.parseInt(monthString), Integer.parseInt(dayString)));
+				}
 			}
 		});
 
