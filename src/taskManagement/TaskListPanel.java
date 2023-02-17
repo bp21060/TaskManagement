@@ -1,7 +1,6 @@
 package taskManagement;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,14 +18,7 @@ import javax.swing.JScrollPane;
 
 public class TaskListPanel extends JPanel {
 
-	JPanel cardLayoutPanel;
-	CardLayout cardLayout;
-
-	public TaskListPanel(JPanel cardLayoutPanel, CardLayout cardLayout) {
-
-		//カードレイアウトを初期設定する
-		this.cardLayoutPanel = cardLayoutPanel;
-		this.cardLayout = cardLayout;
+	public TaskListPanel() {
 
 		//タスク一覧タスクの表示
 		JPanel mainPanel = new JPanel();
@@ -93,7 +85,7 @@ public class TaskListPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String command = e.getActionCommand();
-				cardLayout.show(cardLayoutPanel, command);
+				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, command);
 			}
 		});
 		addButton.setActionCommand("taskAdd");

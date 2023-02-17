@@ -1,7 +1,6 @@
 package taskManagement;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -17,14 +16,7 @@ import javax.swing.border.EtchedBorder;
 
 public class TaskAddPanel extends JPanel {
 
-	JPanel cardLayoutPanel;
-	CardLayout cardLayout;
-
-	public TaskAddPanel(JPanel cardLayoutPanel, CardLayout cardLayout) {
-
-		//カードレイアウトを初期設定する
-		this.cardLayoutPanel = cardLayoutPanel;
-		this.cardLayout = cardLayout;
+	public TaskAddPanel() {
 
 		//タスク一覧タスクの表示
 		JPanel mainPanel = new JPanel();
@@ -107,12 +99,21 @@ public class TaskAddPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String command = e.getActionCommand();
-				cardLayout.show(cardLayoutPanel, command);
+				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, command);
 			}
 		});
 		returnButton.setActionCommand("taskList");
 
 		JButton addButton = new JButton("課題追加");
+		//課題追加ボタンの操作
+		addButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TaskManagement.taskList.add(null);
+			}
+		});
+
 		operationButton.setLayout(layout2);
 		operationButton.add(returnButton);
 		operationButton.add(addButton);

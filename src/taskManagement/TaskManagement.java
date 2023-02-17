@@ -3,14 +3,19 @@ package taskManagement;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class TaskManagement extends JFrame {
 
-	JPanel cardLayoutPanel;
-	CardLayout cardLayout;
+	//カードレイアウト
+	public static JPanel cardLayoutPanel;
+	public static CardLayout cardLayout;
+	//タスクを格納する変数
+	public static List<Task> taskList = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -42,15 +47,15 @@ public class TaskManagement extends JFrame {
 		cardLayoutPanel.setLayout(cardLayout);
 
 		//課題一覧パネルを追加
-		TaskListPanel taskListPanel = new TaskListPanel(cardLayoutPanel, cardLayout);
+		TaskListPanel taskListPanel = new TaskListPanel();
 
 		//課題追加パネルを追加
-		JPanel taskAddPanel = new TaskAddPanel(cardLayoutPanel, cardLayout);
+		JPanel taskAddPanel = new TaskAddPanel();
 
 		cardLayoutPanel.add(taskListPanel, "taskList");
 		cardLayoutPanel.add(taskAddPanel, "taskAdd");
 
-		//削除追加ボタンパネルと課題一覧パネルをcontentPaneに追加
+		//パネルをcontentPaneに追加
 		Container contentPane = getContentPane();
 		contentPane.add(cardLayoutPanel);
 	}
