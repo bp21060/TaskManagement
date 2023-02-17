@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class TaskListPanel extends JPanel implements ActionListener {
+public class TaskListPanel extends JPanel {
 
 	JPanel cardLayoutPanel;
 	CardLayout cardLayout;
@@ -87,7 +87,15 @@ public class TaskListPanel extends JPanel implements ActionListener {
 		layout.setHgap(100);
 
 		JButton addButton = new JButton("課題の追加");
-		addButton.addActionListener(this);
+		//課題追加画面への遷移ボタンの操作
+		addButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String command = e.getActionCommand();
+				cardLayout.show(cardLayoutPanel, command);
+			}
+		});
 		addButton.setActionCommand("taskAdd");
 
 		JButton deleteButton = new JButton("完了した課題の削除");
@@ -99,14 +107,6 @@ public class TaskListPanel extends JPanel implements ActionListener {
 		this.setLayout(new BorderLayout());
 		this.add(taskScroll, BorderLayout.CENTER);
 		this.add(operationButton, BorderLayout.PAGE_END);
-	}
-
-	//ボタンがクリックされた時の操作
-	@Override
-	public void actionPerformed(ActionEvent actionEvent) {
-		String command = actionEvent.getActionCommand();
-
-		cardLayout.show(cardLayoutPanel, command);
 	}
 
 }

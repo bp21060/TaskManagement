@@ -1,9 +1,15 @@
 package taskManagement;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -11,12 +17,19 @@ import javax.swing.border.EtchedBorder;
 
 public class TaskAddPanel extends JPanel {
 
-	public TaskAddPanel() {
+	JPanel cardLayoutPanel;
+	CardLayout cardLayout;
+
+	public TaskAddPanel(JPanel cardLayoutPanel, CardLayout cardLayout) {
+
+		//カードレイアウトを初期設定する
+		this.cardLayoutPanel = cardLayoutPanel;
+		this.cardLayout = cardLayout;
 
 		//タスク一覧タスクの表示
 		JPanel mainPanel = new JPanel();
-		GroupLayout layout = new GroupLayout(this);
-		this.setLayout(layout);
+		GroupLayout layout = new GroupLayout(mainPanel);
+		mainPanel.setLayout(layout);
 
 		//間隔開ける
 		layout.setAutoCreateGaps(false);
@@ -81,6 +94,33 @@ public class TaskAddPanel extends JPanel {
 								.addComponent(detaiLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(detailField)));
+
+		//追加、削除ボタンのパネルを追加
+		JPanel operationButton = new JPanel();
+		GridLayout layout2 = new GridLayout(1, 2);
+		layout2.setHgap(100);
+
+		JButton returnButton = new JButton("元に戻る");
+		//課題一覧画面への遷移ボタンの操作
+		returnButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String command = e.getActionCommand();
+				cardLayout.show(cardLayoutPanel, command);
+			}
+		});
+		returnButton.setActionCommand("taskList");
+
+		JButton addButton = new JButton("課題追加");
+		operationButton.setLayout(layout2);
+		operationButton.add(returnButton);
+		operationButton.add(addButton);
+
+		//全体の画面を表示
+		this.setLayout(new BorderLayout());
+		this.add(mainPanel, BorderLayout.CENTER);
+		this.add(operationButton, BorderLayout.PAGE_END);
 	}
 
 }

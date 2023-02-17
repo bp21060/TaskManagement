@@ -45,7 +45,7 @@ public class TaskManagement extends JFrame {
 		TaskListPanel taskListPanel = new TaskListPanel(cardLayoutPanel, cardLayout);
 
 		//課題追加パネルを追加
-		JPanel taskAddPanel = new TaskAddPanel();
+		JPanel taskAddPanel = new TaskAddPanel(cardLayoutPanel, cardLayout);
 
 		cardLayoutPanel.add(taskListPanel, "taskList");
 		cardLayoutPanel.add(taskAddPanel, "taskAdd");
