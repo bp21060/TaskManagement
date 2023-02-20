@@ -136,6 +136,15 @@ public class TaskAddPanel extends JPanel {
 				} else {
 					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
 							Integer.parseInt(monthString), Integer.parseInt(dayString)));
+					//taskListの内容更新
+					JPanel taskListJPanel = new TaskListPanel();
+					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
+					//記入内容の帳消し
+					nameField.setText("");
+					yearField.setText("");
+					monthField.setText("");
+					dayField.setText("");
+					detailField.setText("");
 				}
 			}
 		});

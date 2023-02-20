@@ -32,10 +32,10 @@ public class TaskListPanel extends JPanel {
 		List<JComponent> taskList = new ArrayList<>();
 
 		//デバック
-		int taskAmount = 20;
+		int taskAmount = TaskManagement.taskList.size();
 
 		for (int i = 0; i < taskAmount; i++) {
-			JComponent label = new JLabel("課題" + i);
+			JComponent label = new JLabel(TaskManagement.taskList.get(i).name);
 			JComponent detailButton = new JButton("詳細");
 			JComponent completeButton = new JButton("完了");
 			taskList.add(label);
