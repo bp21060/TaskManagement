@@ -35,9 +35,10 @@ public class TaskListPanel extends JPanel {
 		int taskAmount = TaskManagement.taskList.size();
 
 		for (int i = 0; i < taskAmount; i++) {
-			JComponent label = new JLabel(TaskManagement.taskList.get(i).name);
-			JComponent detailButton = new JButton("詳細");
-			JComponent completeButton = new JButton("完了");
+			JLabel label = new JLabel(TaskManagement.taskList.get(i).name);
+			JButton detailButton = new JButton("詳細");
+			JButton completeButton = new JButton("完了");
+			//完了ボタンの設定
 			taskList.add(label);
 			taskList.add(detailButton);
 			taskList.add(completeButton);
