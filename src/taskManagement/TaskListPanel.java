@@ -32,10 +32,23 @@ public class TaskListPanel extends JPanel {
 		int taskAmount = TaskManagement.taskList.size();
 
 		for (int i = 0; i < taskAmount; i++) {
-			//完了ボタンの設定
-			taskList.add(TaskManagement.taskList.get(i).label);
-			taskList.add(TaskManagement.taskList.get(i).detailButton);
-			taskList.add(TaskManagement.taskList.get(i).completeButton);
+			//タスクリストの追加
+			Task task = TaskManagement.taskList.get(i);
+			int number = i;
+			taskList.add(task.label);
+			taskList.add(task.detailButton);
+			taskList.add(task.completeButton);
+			//detailボタンの設定
+			task.detailButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//taskEditの作成
+					JPanel taskEditJPanel = new TaskEditPanel(task, number);
+					TaskManagement.cardLayoutPanel.add(taskEditJPanel, "taskEdit");
+					//taskEditの表示
+					TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskEdit");
+				}
+			});
 		}
 
 		//水平グループ
@@ -90,17 +103,16 @@ public class TaskListPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < taskAmount; i++) {
+				for (int i = taskAmount - 1; i >= 0; i--) {
 					//完了したタスクの削除
 					if (TaskManagement.taskList.get(i).completeButton.isSelected()) {
 						TaskManagement.taskList.remove(i);
 					}
-					//taskListの内容更新
-					JPanel taskListJPanel = new TaskListPanel();
-					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
-					TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskList");
 				}
-
+				//taskListの内容更新
+				JPanel taskListJPanel = new TaskListPanel();
+				TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
+				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskList");
 			}
 		});
 		operationButton.setLayout(layout);

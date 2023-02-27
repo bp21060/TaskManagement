@@ -17,6 +17,22 @@ import javax.swing.border.EtchedBorder;
 
 public class TaskAddPanel extends JPanel {
 
+	//コンポーネント
+	Label title = new Label("課題の追加");
+	Label nameLabel = new Label("名前");
+	JTextField nameField = new JTextField(15);
+	Label yearLabel = new Label("年");
+	JTextField yearField = new JTextField(4);
+	Label monthLabel = new Label("月");
+	JTextField monthField = new JTextField(2);
+	Label dayLabel = new Label("日");
+	JTextField dayField = new JTextField(2);
+	Label detaiLabel = new Label("詳細");
+	JTextArea detailField = new JTextArea(4, 20);
+
+	JButton returnButton = new JButton("元に戻る");
+	JButton addButton = new JButton("課題追加");
+
 	public TaskAddPanel() {
 
 		//タスク一覧タスクの表示
@@ -28,18 +44,7 @@ public class TaskAddPanel extends JPanel {
 		layout.setAutoCreateGaps(false);
 		layout.setAutoCreateContainerGaps(true);
 
-		//コンポーネント
-		Label title = new Label("課題の追加");
-		Label nameLabel = new Label("名前");
-		JTextField nameField = new JTextField(15);
-		Label yearLabel = new Label("年");
-		JTextField yearField = new JTextField(4);
-		Label monthLabel = new Label("月");
-		JTextField monthField = new JTextField(2);
-		Label dayLabel = new Label("日");
-		JTextField dayField = new JTextField(2);
-		Label detaiLabel = new Label("詳細");
-		JTextArea detailField = new JTextArea(4, 20);
+		//コンポーネントの設定
 		detailField.setLineWrap(true);
 		detailField.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 
@@ -93,7 +98,6 @@ public class TaskAddPanel extends JPanel {
 		GridLayout layout2 = new GridLayout(1, 2);
 		layout2.setHgap(100);
 
-		JButton returnButton = new JButton("元に戻る");
 		//課題一覧画面への遷移ボタンの操作
 		returnButton.addActionListener(new ActionListener() {
 
@@ -105,8 +109,20 @@ public class TaskAddPanel extends JPanel {
 		});
 		returnButton.setActionCommand("taskList");
 
-		JButton addButton = new JButton("課題追加");
 		//課題追加ボタンの操作
+		Taskadd();
+		operationButton.setLayout(layout2);
+		operationButton.add(returnButton);
+		operationButton.add(addButton);
+
+		//全体の画面を表示
+		this.setLayout(new BorderLayout());
+		this.add(mainPanel, BorderLayout.CENTER);
+		this.add(operationButton, BorderLayout.PAGE_END);
+	}
+
+	//タスクの追加をするメソッド
+	public void Taskadd() {
 		addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -117,23 +133,7 @@ public class TaskAddPanel extends JPanel {
 				String monthString = monthField.getText();
 				String dayString = dayField.getText();
 				String detailString = detailField.getText();
-				//入力内容が適切かどうか判断
-				StringBuilder stringCheck = new StringBuilder();
-				stringCheck.append(yearString);
-				stringCheck.append(monthString);
-				stringCheck.append(dayString);
-				String digitCheckString = stringCheck.toString();
-				boolean digitCheck = true;
-				for (int i = 0; i < digitCheckString.length(); i++) {
-					if (!Character.isDigit(digitCheckString.charAt(i))) {
-						digitCheck = false;
-					}
-				}
-				if (nameString.contains(",")) {
-					JOptionPane.showMessageDialog(addButton, "タイトルに「,」を含んでいます", "Error", JOptionPane.ERROR_MESSAGE);
-				} else if (!digitCheck) {
-					JOptionPane.showMessageDialog(addButton, "期限年月日が適切な数字ではありません", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
+				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
 							Integer.parseInt(monthString), Integer.parseInt(dayString)));
 					//taskListの内容更新
@@ -148,15 +148,32 @@ public class TaskAddPanel extends JPanel {
 				}
 			}
 		});
+	}
 
-		operationButton.setLayout(layout2);
-		operationButton.add(returnButton);
-		operationButton.add(addButton);
-
-		//全体の画面を表示
-		this.setLayout(new BorderLayout());
-		this.add(mainPanel, BorderLayout.CENTER);
-		this.add(operationButton, BorderLayout.PAGE_END);
+	//入力内容が適切かどうか判断するメソッド
+	public boolean InputCheck(String nameString, String yearString, String monthString, String dayString,
+			String detailString) {
+		boolean result = true;
+		//入力内容が適切かどうか判断
+		StringBuilder stringCheck = new StringBuilder();
+		stringCheck.append(yearString);
+		stringCheck.append(monthString);
+		stringCheck.append(dayString);
+		String digitCheckString = stringCheck.toString();
+		boolean digitCheck = true;
+		for (int i = 0; i < digitCheckString.length(); i++) {
+			if (!Character.isDigit(digitCheckString.charAt(i))) {
+				digitCheck = false;
+			}
+		}
+		if (nameString.contains(",")) {
+			JOptionPane.showMessageDialog(addButton, "タイトルに「,」を含んでいます", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (!digitCheck) {
+			JOptionPane.showMessageDialog(addButton, "期限年月日が適切な数字ではありません", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			result = false;
+		}
+		return result;
 	}
 
 }
