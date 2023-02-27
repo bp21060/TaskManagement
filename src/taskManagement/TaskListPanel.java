@@ -12,7 +12,6 @@ import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -30,18 +29,13 @@ public class TaskListPanel extends JPanel {
 		layout2.setAutoCreateContainerGaps(true);
 
 		List<JComponent> taskList = new ArrayList<>();
-
-		//デバック
 		int taskAmount = TaskManagement.taskList.size();
 
 		for (int i = 0; i < taskAmount; i++) {
-			JLabel label = new JLabel(TaskManagement.taskList.get(i).name);
-			JButton detailButton = new JButton("詳細");
-			JButton completeButton = new JButton("完了");
 			//完了ボタンの設定
-			taskList.add(label);
-			taskList.add(detailButton);
-			taskList.add(completeButton);
+			taskList.add(TaskManagement.taskList.get(i).label);
+			taskList.add(TaskManagement.taskList.get(i).detailButton);
+			taskList.add(TaskManagement.taskList.get(i).completeButton);
 		}
 
 		//水平グループ
@@ -92,6 +86,23 @@ public class TaskListPanel extends JPanel {
 		addButton.setActionCommand("taskAdd");
 
 		JButton deleteButton = new JButton("完了した課題の削除");
+		deleteButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < taskAmount; i++) {
+					//完了したタスクの削除
+					if (TaskManagement.taskList.get(i).completeButton.isSelected()) {
+						TaskManagement.taskList.remove(i);
+					}
+					//taskListの内容更新
+					JPanel taskListJPanel = new TaskListPanel();
+					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
+					TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskList");
+				}
+
+			}
+		});
 		operationButton.setLayout(layout);
 		operationButton.add(addButton);
 		operationButton.add(deleteButton);
