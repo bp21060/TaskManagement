@@ -39,6 +39,8 @@ public class TaskEditPanel extends TaskAddPanel {
 				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.set(number, new Task(nameString, detailString, Integer.parseInt(yearString),
 							Integer.parseInt(monthString), Integer.parseInt(dayString)));
+					//更新情報をセーブする
+					new SaveData().Save();
 					//taskListの内容更新
 					JPanel taskListJPanel = new TaskListPanel();
 					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");

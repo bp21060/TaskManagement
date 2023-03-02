@@ -25,6 +25,8 @@ public class TaskManagement extends JFrame {
 			@Override
 			public void run() {
 				try {
+					//セーブデータの読み込み
+					new SaveData().Load();
 					TaskManagement frame = new TaskManagement();
 					frame.setVisible(true);
 				} catch (Exception e) {
