@@ -109,6 +109,9 @@ public class TaskListPanel extends JPanel {
 						TaskManagement.taskList.remove(i);
 					}
 				}
+				//更新情報をセーブする
+				new SaveData().Save();
+
 				//taskListの内容更新
 				JPanel taskListJPanel = new TaskListPanel();
 				TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");

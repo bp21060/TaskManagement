@@ -54,7 +54,7 @@ public class TaskAddPanel extends JPanel {
 
 		//初期の日付を現在時刻にする
 		yearField.setText(String.valueOf(calendar.get(Calendar.YEAR)));
-		monthField.setText(String.valueOf(calendar.get(Calendar.MONTH)));
+		monthField.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
 		dayField.setText(String.valueOf(calendar.get(Calendar.DATE)));
 
 		//水平グループ
@@ -145,8 +145,10 @@ public class TaskAddPanel extends JPanel {
 				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
 							Integer.parseInt(monthString), Integer.parseInt(dayString)));
+
 					//更新情報をセーブする
 					new SaveData().Save();
+
 					//taskListの内容更新
 					JPanel taskListJPanel = new TaskListPanel();
 					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
@@ -157,7 +159,7 @@ public class TaskAddPanel extends JPanel {
 					//記入内容の帳消し
 					nameField.setText("");
 					yearField.setText(String.valueOf(calendar.get(Calendar.YEAR)));
-					monthField.setText(String.valueOf(calendar.get(Calendar.MONTH)));
+					monthField.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
 					dayField.setText(String.valueOf(calendar.get(Calendar.DATE)));
 					detailField.setText("");
 				}

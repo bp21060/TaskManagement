@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Calendar;
 
 public class SaveData {
 
@@ -18,7 +19,8 @@ public class SaveData {
 			for (int i = 0; i < TaskManagement.taskList.size(); i++) {
 				Task task = TaskManagement.taskList.get(i);
 				fileWriter.write(
-						task.name + "," + task.year + "," + task.month + "," + task.day + "," + task.detail + "\r\n");
+						task.name + "," + task.deadline.get(Calendar.YEAR) + "," + task.deadline.get(Calendar.MONTH)
+								+ "," + task.deadline.get(Calendar.DATE) + "," + task.detail + "\r\n");
 			}
 			fileWriter.close();
 
@@ -33,24 +35,15 @@ public class SaveData {
 			//ファイル読み込み
 			File saveFile = new File("saveFile.csv");
 
-			//デバック
-			System.out.println("1");
-
 			if (saveFile.exists()) {
 				FileReader fileReader = new FileReader(saveFile);
 				BufferedReader bufferedReader = new BufferedReader(fileReader);
 				String content;
 				String[] contentList = new String[5];
 
-				//デバック
-				System.out.println("2");
-
 				while ((content = bufferedReader.readLine()) != null) {
 					//カンマで分割してそれぞれを摘出する。
 					contentList = content.split(",", 5);
-
-					//デバック
-					System.out.println("3");
 
 					//期限がしっかりと日時になっているか確認する。
 					for (int i = 1; i <= 3; i++) {
@@ -62,9 +55,6 @@ public class SaveData {
 							}
 						}
 					}
-
-					//デバック
-					System.out.println("4");
 
 					Task task = new Task(contentList[0], contentList[4], Integer.parseInt(contentList[1]),
 							Integer.parseInt(contentList[2]), Integer.parseInt(contentList[3]));

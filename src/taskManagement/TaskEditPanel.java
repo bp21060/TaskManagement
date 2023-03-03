@@ -2,6 +2,7 @@ package taskManagement;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.JPanel;
 
@@ -16,9 +17,9 @@ public class TaskEditPanel extends TaskAddPanel {
 		this.number = number;
 		title.setText("タスクの編集");
 		nameField.setText(this.task.name);
-		yearField.setText(String.valueOf(this.task.year));
-		monthField.setText(String.valueOf(this.task.month));
-		dayField.setText(String.valueOf(this.task.day));
+		yearField.setText(String.valueOf(this.task.deadline.get(Calendar.YEAR)));
+		monthField.setText(String.valueOf(this.task.deadline.get(Calendar.MONTH)));
+		dayField.setText(String.valueOf(this.task.deadline.get(Calendar.DATE)));
 		detailField.setText(this.task.detail);
 		addButton.setText("編集完了");
 	}
