@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -47,6 +48,14 @@ public class TaskAddPanel extends JPanel {
 		//コンポーネントの設定
 		detailField.setLineWrap(true);
 		detailField.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+
+		//現在時刻を取得
+		Calendar calendar = Calendar.getInstance();
+
+		//初期の日付を現在時刻にする
+		yearField.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+		monthField.setText(String.valueOf(calendar.get(Calendar.MONTH)));
+		dayField.setText(String.valueOf(calendar.get(Calendar.DATE)));
 
 		//水平グループ
 		layout.setHorizontalGroup(
@@ -141,11 +150,15 @@ public class TaskAddPanel extends JPanel {
 					//taskListの内容更新
 					JPanel taskListJPanel = new TaskListPanel();
 					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
+
+					//現在時刻を取得
+					Calendar calendar = Calendar.getInstance();
+
 					//記入内容の帳消し
 					nameField.setText("");
-					yearField.setText("");
-					monthField.setText("");
-					dayField.setText("");
+					yearField.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+					monthField.setText(String.valueOf(calendar.get(Calendar.MONTH)));
+					dayField.setText(String.valueOf(calendar.get(Calendar.DATE)));
 					detailField.setText("");
 				}
 			}
