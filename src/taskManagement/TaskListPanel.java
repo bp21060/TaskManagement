@@ -58,7 +58,7 @@ public class TaskListPanel extends JPanel {
 		for (int i = 0; i < 4; i++) {
 			ParallelGroup pGroup = layout2.createParallelGroup();
 			for (int j = 0; j < taskAmount; j++) {
-				pGroup.addComponent(taskList.get(3 * j + i));
+				pGroup.addComponent(taskList.get(4 * j + i));
 			}
 			hGroup.addGroup(pGroup);
 		}
@@ -71,7 +71,7 @@ public class TaskListPanel extends JPanel {
 		for (int i = 0; i < taskAmount; i++) {
 			ParallelGroup pGroup2 = layout2.createParallelGroup();
 			for (int j = 0; j < 4; j++) {
-				pGroup2.addComponent(taskList.get(3 * i + j));
+				pGroup2.addComponent(taskList.get(4 * i + j));
 			}
 			vGroup.addGroup(pGroup2);
 		}
