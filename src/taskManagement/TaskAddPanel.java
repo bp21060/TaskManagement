@@ -144,7 +144,7 @@ public class TaskAddPanel extends JPanel {
 				String detailString = detailField.getText();
 				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
-							Integer.parseInt(monthString), Integer.parseInt(dayString)));
+							Integer.parseInt(monthString) - 1, Integer.parseInt(dayString)));
 
 					//更新情報をセーブする
 					new SaveData().Save();

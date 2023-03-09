@@ -18,7 +18,7 @@ public class TaskEditPanel extends TaskAddPanel {
 		title.setText("タスクの編集");
 		nameField.setText(this.task.name);
 		yearField.setText(String.valueOf(this.task.deadline.get(Calendar.YEAR)));
-		monthField.setText(String.valueOf(this.task.deadline.get(Calendar.MONTH)));
+		monthField.setText(String.valueOf(this.task.deadline.get(Calendar.MONTH) + 1));
 		dayField.setText(String.valueOf(this.task.deadline.get(Calendar.DATE)));
 		detailField.setText(this.task.detail);
 		addButton.setText("編集完了");
@@ -39,7 +39,7 @@ public class TaskEditPanel extends TaskAddPanel {
 				String detailString = detailField.getText();
 				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.set(number, new Task(nameString, detailString, Integer.parseInt(yearString),
-							Integer.parseInt(monthString), Integer.parseInt(dayString)));
+							Integer.parseInt(monthString) - 1, Integer.parseInt(dayString)));
 					//更新情報をセーブする
 					new SaveData().Save();
 					//taskListの内容更新

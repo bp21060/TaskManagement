@@ -38,6 +38,7 @@ public class TaskListPanel extends JPanel {
 			taskList.add(task.label);
 			taskList.add(task.detailButton);
 			taskList.add(task.completeButton);
+			taskList.add(task.timeleftLabel);
 			//detailボタンの設定
 			task.detailButton.addActionListener(new ActionListener() {
 				@Override
@@ -54,7 +55,7 @@ public class TaskListPanel extends JPanel {
 		//水平グループ
 		SequentialGroup hGroup = layout2.createSequentialGroup();
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			ParallelGroup pGroup = layout2.createParallelGroup();
 			for (int j = 0; j < taskAmount; j++) {
 				pGroup.addComponent(taskList.get(3 * j + i));
@@ -69,7 +70,7 @@ public class TaskListPanel extends JPanel {
 
 		for (int i = 0; i < taskAmount; i++) {
 			ParallelGroup pGroup2 = layout2.createParallelGroup();
-			for (int j = 0; j < 3; j++) {
+			for (int j = 0; j < 4; j++) {
 				pGroup2.addComponent(taskList.get(3 * i + j));
 			}
 			vGroup.addGroup(pGroup2);
