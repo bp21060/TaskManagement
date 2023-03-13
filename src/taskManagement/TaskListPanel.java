@@ -123,9 +123,24 @@ public class TaskListPanel extends JPanel {
 		operationButton.add(addButton);
 		operationButton.add(deleteButton);
 
+		//普通のタスクと毎週タスクの一覧表示
+		JPanel taskSwitchng = new JPanel();
+		taskSwitchng.setLayout(new BorderLayout());
+		JButton taskSwitchingButton = new JButton("毎週課題");
+		//課題追加画面への遷移ボタンの操作
+		taskSwitchingButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "weekTaskList");
+			}
+		});
+		taskSwitchng.add(taskSwitchingButton, BorderLayout.EAST);
+
 		//全体の画面を表示
 		this.setLayout(new BorderLayout());
 		this.add(taskScroll, BorderLayout.CENTER);
+		this.add(taskSwitchng, BorderLayout.PAGE_START);
 		this.add(operationButton, BorderLayout.PAGE_END);
 	}
 
