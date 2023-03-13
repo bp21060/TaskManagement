@@ -17,8 +17,44 @@ import javax.swing.JScrollPane;
 
 public class TaskListPanel extends JPanel {
 
+	int taskAmount = 0;
+
 	public TaskListPanel() {
 
+		//タスク一覧タスクの表示
+		JPanel mainPanel = mainPanel();
+
+		//スクロールの追加
+		JScrollPane taskScroll = new JScrollPane(mainPanel);
+		taskScroll.getVerticalScrollBar().setUnitIncrement(20);
+
+		//追加、削除ボタンのパネルを追加
+		JPanel operationButton = new JPanel();
+		GridLayout layout = new GridLayout(1, 2);
+		layout.setHgap(100);
+
+		JButton addButton = addButton();
+
+		JButton deleteButton = deleteButton();
+		operationButton.setLayout(layout);
+		operationButton.add(addButton);
+		operationButton.add(deleteButton);
+
+		//普通のタスクと毎週タスクの一覧表示
+		JPanel taskSwitchng = new JPanel();
+		taskSwitchng.setLayout(new BorderLayout());
+		JButton taskSwitchingButton = taskSwitchingButton();
+		taskSwitchng.add(taskSwitchingButton, BorderLayout.EAST);
+
+		//全体の画面を表示
+		this.setLayout(new BorderLayout());
+		this.add(taskScroll, BorderLayout.CENTER);
+		this.add(taskSwitchng, BorderLayout.PAGE_START);
+		this.add(operationButton, BorderLayout.PAGE_END);
+	}
+
+	//メイン画面の部分
+	public JPanel mainPanel() {
 		//タスク一覧タスクの表示
 		JPanel mainPanel = new JPanel();
 		GroupLayout layout2 = new GroupLayout(mainPanel);
@@ -29,7 +65,7 @@ public class TaskListPanel extends JPanel {
 		layout2.setAutoCreateContainerGaps(true);
 
 		List<JComponent> taskList = new ArrayList<>();
-		int taskAmount = TaskManagement.taskList.size();
+		taskAmount = TaskManagement.taskList.size();
 
 		for (int i = 0; i < taskAmount; i++) {
 			//タスクリストの追加
@@ -77,17 +113,13 @@ public class TaskListPanel extends JPanel {
 		}
 
 		layout2.setVerticalGroup(vGroup);
+		return mainPanel;
+	}
 
-		//スクロールの追加
-		JScrollPane taskScroll = new JScrollPane(mainPanel);
-		taskScroll.getVerticalScrollBar().setUnitIncrement(20);
-
-		//追加、削除ボタンのパネルを追加
-		JPanel operationButton = new JPanel();
-		GridLayout layout = new GridLayout(1, 2);
-		layout.setHgap(100);
-
+	//課題追加パネル遷移ボタン
+	public JButton addButton() {
 		JButton addButton = new JButton("課題の追加");
+
 		//課題追加画面への遷移ボタンの操作
 		addButton.addActionListener(new ActionListener() {
 
@@ -99,7 +131,13 @@ public class TaskListPanel extends JPanel {
 		});
 		addButton.setActionCommand("taskAdd");
 
+		return addButton;
+	}
+
+	//課題削除ボタン
+	public JButton deleteButton() {
 		JButton deleteButton = new JButton("完了した課題の削除");
+		new JButton("完了した課題の削除");
 		deleteButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -119,13 +157,11 @@ public class TaskListPanel extends JPanel {
 				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskList");
 			}
 		});
-		operationButton.setLayout(layout);
-		operationButton.add(addButton);
-		operationButton.add(deleteButton);
+		return deleteButton;
+	}
 
-		//普通のタスクと毎週タスクの一覧表示
-		JPanel taskSwitchng = new JPanel();
-		taskSwitchng.setLayout(new BorderLayout());
+	//表示するタスクの種類を切り替えるボタン
+	public JButton taskSwitchingButton() {
 		JButton taskSwitchingButton = new JButton("毎週課題");
 		//課題追加画面への遷移ボタンの操作
 		taskSwitchingButton.addActionListener(new ActionListener() {
@@ -135,13 +171,7 @@ public class TaskListPanel extends JPanel {
 				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "weekTaskList");
 			}
 		});
-		taskSwitchng.add(taskSwitchingButton, BorderLayout.EAST);
 
-		//全体の画面を表示
-		this.setLayout(new BorderLayout());
-		this.add(taskScroll, BorderLayout.CENTER);
-		this.add(taskSwitchng, BorderLayout.PAGE_START);
-		this.add(operationButton, BorderLayout.PAGE_END);
+		return taskSwitchingButton;
 	}
-
 }
