@@ -122,14 +122,11 @@ public class TaskListPanel extends JPanel {
 
 		//課題追加画面への遷移ボタンの操作
 		addButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String command = e.getActionCommand();
-				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, command);
+				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskAdd");
 			}
 		});
-		addButton.setActionCommand("taskAdd");
 
 		return addButton;
 	}

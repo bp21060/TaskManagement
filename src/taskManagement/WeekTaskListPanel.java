@@ -1,19 +1,29 @@
 package taskManagement;
 
-import javax.swing.GroupLayout;
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class WeekTaskListPanel extends JPanel {
+import javax.swing.JButton;
+
+public class WeekTaskListPanel extends TaskListPanel {
 
 	public WeekTaskListPanel() {
+		super();
+	}
 
-		//タスク一覧タスクの表示
-		JPanel mainPanel = new JPanel();
-		GroupLayout layout2 = new GroupLayout(mainPanel);
-		mainPanel.setLayout(layout2);
+	//表示するタスクの種類を切り替えるボタン
+	@Override
+	public JButton taskSwitchingButton() {
+		JButton taskSwitchingButton = new JButton("課題");
+		//課題追加画面への遷移ボタンの操作
+		taskSwitchingButton.addActionListener(new ActionListener() {
 
-		//間隔開ける
-		layout2.setAutoCreateGaps(true);
-		layout2.setAutoCreateContainerGaps(true);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskList");
+			}
+		});
+
+		return taskSwitchingButton;
 	}
 }
