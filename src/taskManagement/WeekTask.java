@@ -2,6 +2,7 @@ package taskManagement;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 
 public class WeekTask {
 	String name;
@@ -10,6 +11,7 @@ public class WeekTask {
 	int dayOfTheWeek;
 	//タスクが自動追加される日から期限までの日にち
 	int period;
+	JLabel label;
 	JButton detailButton = new JButton("詳細");
 	JCheckBox completeButton = new JCheckBox("削除");
 
@@ -19,5 +21,6 @@ public class WeekTask {
 		this.detail = detail;
 		this.dayOfTheWeek = dayOfTheWeek;
 		this.period = period;
+		this.label = new JLabel(name);
 	}
 }

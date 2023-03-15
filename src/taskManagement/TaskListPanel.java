@@ -55,14 +55,14 @@ public class TaskListPanel extends JPanel {
 
 	//メイン画面の部分
 	public JPanel mainPanel() {
-		//タスク一覧タスクの表示
+
 		JPanel mainPanel = new JPanel();
-		GroupLayout layout2 = new GroupLayout(mainPanel);
-		mainPanel.setLayout(layout2);
+		GroupLayout layout = new GroupLayout(mainPanel);
+		mainPanel.setLayout(layout);
 
 		//間隔開ける
-		layout2.setAutoCreateGaps(true);
-		layout2.setAutoCreateContainerGaps(true);
+		layout.setAutoCreateGaps(true);
+		layout.setAutoCreateContainerGaps(true);
 
 		List<JComponent> taskList = new ArrayList<>();
 		taskAmount = TaskManagement.taskList.size();
@@ -89,30 +89,30 @@ public class TaskListPanel extends JPanel {
 		}
 
 		//水平グループ
-		SequentialGroup hGroup = layout2.createSequentialGroup();
+		SequentialGroup hGroup = layout.createSequentialGroup();
 
 		for (int i = 0; i < 4; i++) {
-			ParallelGroup pGroup = layout2.createParallelGroup();
+			ParallelGroup pGroup = layout.createParallelGroup();
 			for (int j = 0; j < taskAmount; j++) {
 				pGroup.addComponent(taskList.get(4 * j + i));
 			}
 			hGroup.addGroup(pGroup);
 		}
 
-		layout2.setHorizontalGroup(hGroup);
+		layout.setHorizontalGroup(hGroup);
 
 		//垂直グループ
-		SequentialGroup vGroup = layout2.createSequentialGroup();
+		SequentialGroup vGroup = layout.createSequentialGroup();
 
 		for (int i = 0; i < taskAmount; i++) {
-			ParallelGroup pGroup2 = layout2.createParallelGroup();
+			ParallelGroup pGroup2 = layout.createParallelGroup();
 			for (int j = 0; j < 4; j++) {
 				pGroup2.addComponent(taskList.get(4 * i + j));
 			}
 			vGroup.addGroup(pGroup2);
 		}
 
-		layout2.setVerticalGroup(vGroup);
+		layout.setVerticalGroup(vGroup);
 		return mainPanel;
 	}
 
@@ -134,7 +134,6 @@ public class TaskListPanel extends JPanel {
 	//課題削除ボタン
 	public JButton deleteButton() {
 		JButton deleteButton = new JButton("完了した課題の削除");
-		new JButton("完了した課題の削除");
 		deleteButton.addActionListener(new ActionListener() {
 
 			@Override

@@ -14,8 +14,10 @@ public class TaskManagement extends JFrame {
 	//カードレイアウト
 	public static JPanel cardLayoutPanel;
 	public static CardLayout cardLayout;
-	//タスクを格納する変数
+	//タスクを格納するリスト
 	public static List<Task> taskList = new ArrayList<>();
+	//毎週タスクを格納するリスト
+	public static List<WeekTask> weekTaskList = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -57,9 +59,13 @@ public class TaskManagement extends JFrame {
 		//毎週課題一覧パネルを追加
 		WeekTaskListPanel weekTaskListPanel = new WeekTaskListPanel();
 
+		//毎週課題追加パネルを追加
+		WeekTaskAddPanel weekTaskAddPanel = new WeekTaskAddPanel();
+
 		cardLayoutPanel.add(taskListPanel, "taskList");
 		cardLayoutPanel.add(taskAddPanel, "taskAdd");
 		cardLayoutPanel.add(weekTaskListPanel, "weekTaskList");
+		cardLayoutPanel.add(weekTaskAddPanel, "weekTaskAdd");
 
 		//パネルをcontentPaneに追加
 		Container contentPane = getContentPane();
