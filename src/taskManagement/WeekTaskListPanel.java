@@ -11,6 +11,8 @@ public class WeekTaskListPanel extends TaskListPanel {
 		super();
 	}
 
+	//
+
 	//表示するタスクの種類を切り替えるボタン
 	@Override
 	public JButton taskSwitchingButton() {
