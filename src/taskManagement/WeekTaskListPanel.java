@@ -40,19 +40,17 @@ public class WeekTaskListPanel extends TaskListPanel {
 			weekTaskList.add(weekTask.label);
 			weekTaskList.add(weekTask.detailButton);
 			weekTaskList.add(weekTask.completeButton);
-			/*
 			//detailボタンの設定
 			weekTask.detailButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//taskEditの作成
-					JPanel weekTaskEditJPanel = new TaskEditPanel(weekTask, number);
+					JPanel weekTaskEditJPanel = new WeekTaskEditPanel(weekTask, number);
 					TaskManagement.cardLayoutPanel.add(weekTaskEditJPanel, "taskEdit");
 					//taskEditの表示
 					TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "taskEdit");
 				}
 			});
-			*/
 		}
 
 		//水平グループ
