@@ -10,6 +10,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -111,7 +112,7 @@ public class WeekTaskAddPanel extends JPanel {
 		});
 
 		//課題追加ボタンの操作
-		//Taskadd();
+		Taskadd();
 		operationButton.setLayout(layout2);
 		operationButton.add(returnButton);
 		operationButton.add(addButton);
@@ -122,53 +123,46 @@ public class WeekTaskAddPanel extends JPanel {
 		this.add(operationButton, BorderLayout.PAGE_END);
 	}
 
-	/*
 	//タスクの追加をするメソッド
 	public void Taskadd() {
 		addButton.addActionListener(new ActionListener() {
-	
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//入力内容からタスクを読み込む
 				String nameString = nameField.getText();
-				String yearString = yearField.getText();
-				String monthString = monthField.getText();
-				String dayString = dayField.getText();
+				String periodString = periodField.getText();
 				String detailString = detailField.getText();
-				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
-					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
-							Integer.parseInt(monthString) - 1, Integer.parseInt(dayString)));
-	
+				if (!InputCheck(nameString, periodString, detailString)) {
+					//曜日を数字に変換
+					int dayOfTheWeek = dayOfTheWeekChange();
+					//毎週課題をweekTaskListに追加する
+					TaskManagement.weekTaskList
+							.add(new WeekTask(nameString, detailString, dayOfTheWeek, Integer.parseInt(periodString)));
+
 					//更新情報をセーブする
-					new SaveData().Save();
-	
+					//new SaveData().Save();
+
 					//taskListの内容更新
-					JPanel taskListJPanel = new TaskListPanel();
-					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");
-	
-					//現在時刻を取得
-					Calendar calendar = Calendar.getInstance();
-	
+					JPanel weekTaskListJPanel = new WeekTaskListPanel();
+					TaskManagement.cardLayoutPanel.add(weekTaskListJPanel, "weekTaskList");
+
 					//記入内容の帳消し
 					nameField.setText("");
-					yearField.setText(String.valueOf(calendar.get(Calendar.YEAR)));
-					monthField.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
-					dayField.setText(String.valueOf(calendar.get(Calendar.DATE)));
 					detailField.setText("");
+					dayOfTheWeekComboBox.setSelectedItem("日曜日");
+					periodField.setText("");
 				}
 			}
 		});
 	}
-	
+
 	//入力内容が適切かどうか判断するメソッド
-	public boolean InputCheck(String nameString, String yearString, String monthString, String dayString,
-			String detailString) {
+	public boolean InputCheck(String nameString, String periodString, String detailString) {
 		boolean result = true;
 		//入力内容が適切かどうか判断
 		StringBuilder stringCheck = new StringBuilder();
-		stringCheck.append(yearString);
-		stringCheck.append(monthString);
-		stringCheck.append(dayString);
+		stringCheck.append(periodString);
 		String digitCheckString = stringCheck.toString();
 		boolean digitCheck = true;
 		for (int i = 0; i < digitCheckString.length(); i++) {
@@ -185,7 +179,33 @@ public class WeekTaskAddPanel extends JPanel {
 		}
 		return result;
 	}
-	
-	*/
+
+	//曜日を数字に変換するメソッド
+	public int dayOfTheWeekChange() {
+		int result = 0;
+		String dayOfTheWeek = dayOfTheWeekComboBox.getSelectedItem().toString();
+		switch (dayOfTheWeek) {
+		case "土曜日":
+			result = 6;
+			break;
+		case "金曜日":
+			result = 5;
+			break;
+		case "木曜日":
+			result = 4;
+			break;
+		case "水曜日":
+			result = 3;
+			break;
+		case "火曜日":
+			result = 2;
+			break;
+		case "月曜日":
+			result = 1;
+			break;
+		}
+
+		return result;
+	}
 
 }

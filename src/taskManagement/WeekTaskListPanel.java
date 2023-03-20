@@ -121,7 +121,7 @@ public class WeekTaskListPanel extends TaskListPanel {
 				*/
 
 				//taskListの内容更新
-				JPanel weekTaskListJPanel = new TaskListPanel();
+				JPanel weekTaskListJPanel = new WeekTaskListPanel();
 				TaskManagement.cardLayoutPanel.add(weekTaskListJPanel, "weekTaskList");
 				TaskManagement.cardLayout.show(TaskManagement.cardLayoutPanel, "weekTaskList");
 			}
