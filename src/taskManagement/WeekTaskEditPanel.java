@@ -41,7 +41,7 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 							new WeekTask(nameString, detailString, dayOfTheWeek, Integer.parseInt(periodString)));
 
 					//更新情報をセーブする
-					//new SaveData().Save();
+					new SaveData().WeekTaskSave();
 					//taskListの内容更新
 					JPanel weekTaskListJPanel = new WeekTaskListPanel();
 					TaskManagement.cardLayoutPanel.add(weekTaskListJPanel, "weekTaskList");

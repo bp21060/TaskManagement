@@ -12,7 +12,7 @@ public class SaveData {
 	public void Save() {
 		try {
 			//ファイル読み込み
-			File saveFile = new File("saveFile.csv");
+			File saveFile = new File("taskSaveFile.csv");
 			FileWriter fileWriter = new FileWriter(saveFile);
 
 			//セーブデータの内容書き込み
@@ -29,11 +29,39 @@ public class SaveData {
 		}
 	}
 
-	//セーブデータのロード
-	public void Load() {
+	//毎週課題のセーブ
+	public void WeekTaskSave() {
 		try {
 			//ファイル読み込み
-			File saveFile = new File("saveFile.csv");
+			File saveFile = new File("weekTaskSaveFile.csv");
+			FileWriter fileWriter = new FileWriter(saveFile);
+
+			//セーブデータの内容書き込み
+			for (int i = 0; i < TaskManagement.weekTaskList.size(); i++) {
+				WeekTask weekTask = TaskManagement.weekTaskList.get(i);
+				fileWriter.write(
+						weekTask.name + "," + weekTask.dayOfTheWeek + "," + weekTask.period + "," + weekTask.detail
+								+ "\r\n");
+			}
+			fileWriter.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	//セーブデータのロード
+	public void Load() {
+		TaskLoad();
+		WeekTaskLoad();
+	}
+
+	//通常課題のロード
+	public void TaskLoad() {
+		try {
+			//ファイル読み込み
+			File saveFile = new File("taskSaveFile.csv");
 
 			if (saveFile.exists()) {
 				FileReader fileReader = new FileReader(saveFile);
@@ -59,6 +87,59 @@ public class SaveData {
 					Task task = new Task(contentList[0], contentList[4], Integer.parseInt(contentList[1]),
 							Integer.parseInt(contentList[2]), Integer.parseInt(contentList[3]));
 					TaskManagement.taskList.add(task);
+				}
+				bufferedReader.close();
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	//毎週課題のロード
+	public void WeekTaskLoad() {
+		try {
+			//ファイル読み込み
+			File saveFile = new File("weekTaskSaveFile.csv");
+
+			if (saveFile.exists()) {
+				FileReader fileReader = new FileReader(saveFile);
+				BufferedReader bufferedReader = new BufferedReader(fileReader);
+				String content;
+				String[] contentList = new String[4];
+
+				while ((content = bufferedReader.readLine()) != null) {
+					//カンマで分割してそれぞれを摘出する。
+					contentList = content.split(",", 4);
+
+					//開始曜日が適切な数字になっている確認する
+					for (int j = 0; j < contentList[2].length(); j++) {
+						if (!Character.isDigit(contentList[1].charAt(j))) {
+							System.out.println("セーブデータ内に格納されている開始曜日が数字以外になっています");
+							bufferedReader.close();
+							return;
+						}
+						int i = Integer.valueOf(contentList[1]);
+						if (i < 0 || i > 6) {
+							System.out.println("セーブデータ内に格納されている開始曜日が適切な数字ではありません");
+							bufferedReader.close();
+							return;
+						}
+					}
+
+					//期限がしっかりと日時になっているか確認する。
+					for (int j = 0; j < contentList[2].length(); j++) {
+						if (!Character.isDigit(contentList[2].charAt(j))) {
+							System.out.println("セーブデータ内に格納されている期限が数字以外になっています");
+							bufferedReader.close();
+							return;
+						}
+					}
+
+					WeekTask weekTask = new WeekTask(contentList[0], contentList[3], Integer.parseInt(contentList[1]),
+							Integer.parseInt(contentList[2]));
+					TaskManagement.weekTaskList.add(weekTask);
 				}
 				bufferedReader.close();
 			}

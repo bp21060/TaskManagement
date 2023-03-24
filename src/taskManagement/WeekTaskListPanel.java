@@ -113,10 +113,8 @@ public class WeekTaskListPanel extends TaskListPanel {
 					}
 				}
 
-				/*
 				//更新情報をセーブする
-				new SaveData().Save();
-				*/
+				new SaveData().WeekTaskSave();
 
 				//taskListの内容更新
 				JPanel weekTaskListJPanel = new WeekTaskListPanel();
