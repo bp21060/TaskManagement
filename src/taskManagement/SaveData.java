@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 public class SaveData {
 
-	//セーブ
+	//通常課題のセーブ
 	public void taskSave() {
 		try {
 			//ファイル読み込み
