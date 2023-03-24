@@ -26,7 +26,7 @@ public class TaskEditPanel extends TaskAddPanel {
 
 	//TaskAddを新規追加から現状のものを上書きする形で追加するものに変更
 	@Override
-	public void Taskadd() {
+	public void taskadd() {
 		addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -37,11 +37,11 @@ public class TaskEditPanel extends TaskAddPanel {
 				String monthString = monthField.getText();
 				String dayString = dayField.getText();
 				String detailString = detailField.getText();
-				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
+				if (!inputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.set(number, new Task(nameString, detailString, Integer.parseInt(yearString),
 							Integer.parseInt(monthString) - 1, Integer.parseInt(dayString)));
 					//更新情報をセーブする
-					new SaveData().Save();
+					new SaveData().taskSave();
 					//taskListの内容更新
 					JPanel taskListJPanel = new TaskListPanel();
 					TaskManagement.cardLayoutPanel.add(taskListJPanel, "taskList");

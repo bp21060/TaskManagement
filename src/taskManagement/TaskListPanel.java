@@ -145,7 +145,7 @@ public class TaskListPanel extends JPanel {
 					}
 				}
 				//更新情報をセーブする
-				new SaveData().Save();
+				new SaveData().taskSave();
 
 				//taskListの内容更新
 				JPanel taskListJPanel = new TaskListPanel();

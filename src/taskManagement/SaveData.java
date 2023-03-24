@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class SaveData {
 
 	//セーブ
-	public void Save() {
+	public void taskSave() {
 		try {
 			//ファイル読み込み
 			File saveFile = new File("taskSaveFile.csv");
@@ -30,7 +30,7 @@ public class SaveData {
 	}
 
 	//毎週課題のセーブ
-	public void WeekTaskSave() {
+	public void weekTaskSave() {
 		try {
 			//ファイル読み込み
 			File saveFile = new File("weekTaskSaveFile.csv");
@@ -52,13 +52,13 @@ public class SaveData {
 	}
 
 	//セーブデータのロード
-	public void Load() {
-		TaskLoad();
-		WeekTaskLoad();
+	public void load() {
+		taskLoad();
+		weekTaskLoad();
 	}
 
 	//通常課題のロード
-	public void TaskLoad() {
+	public void taskLoad() {
 		try {
 			//ファイル読み込み
 			File saveFile = new File("taskSaveFile.csv");
@@ -98,7 +98,7 @@ public class SaveData {
 	}
 
 	//毎週課題のロード
-	public void WeekTaskLoad() {
+	public void weekTaskLoad() {
 		try {
 			//ファイル読み込み
 			File saveFile = new File("weekTaskSaveFile.csv");

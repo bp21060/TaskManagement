@@ -119,7 +119,7 @@ public class TaskAddPanel extends JPanel {
 		returnButton.setActionCommand("taskList");
 
 		//課題追加ボタンの操作
-		Taskadd();
+		taskadd();
 		operationButton.setLayout(layout2);
 		operationButton.add(returnButton);
 		operationButton.add(addButton);
@@ -131,7 +131,7 @@ public class TaskAddPanel extends JPanel {
 	}
 
 	//タスクの追加をするメソッド
-	public void Taskadd() {
+	public void taskadd() {
 		addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -142,12 +142,12 @@ public class TaskAddPanel extends JPanel {
 				String monthString = monthField.getText();
 				String dayString = dayField.getText();
 				String detailString = detailField.getText();
-				if (!InputCheck(nameString, yearString, monthString, dayString, detailString)) {
+				if (!inputCheck(nameString, yearString, monthString, dayString, detailString)) {
 					TaskManagement.taskList.add(new Task(nameString, detailString, Integer.parseInt(yearString),
 							Integer.parseInt(monthString) - 1, Integer.parseInt(dayString)));
 
 					//更新情報をセーブする
-					new SaveData().Save();
+					new SaveData().taskSave();
 
 					//taskListの内容更新
 					JPanel taskListJPanel = new TaskListPanel();
@@ -168,7 +168,7 @@ public class TaskAddPanel extends JPanel {
 	}
 
 	//入力内容が適切かどうか判断するメソッド
-	public boolean InputCheck(String nameString, String yearString, String monthString, String dayString,
+	public boolean inputCheck(String nameString, String yearString, String monthString, String dayString,
 			String detailString) {
 		boolean result = true;
 		//入力内容が適切かどうか判断

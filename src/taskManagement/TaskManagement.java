@@ -28,7 +28,7 @@ public class TaskManagement extends JFrame {
 			public void run() {
 				try {
 					//セーブデータの読み込み
-					new SaveData().Load();
+					new SaveData().load();
 					TaskManagement frame = new TaskManagement();
 					frame.setVisible(true);
 				} catch (Exception e) {

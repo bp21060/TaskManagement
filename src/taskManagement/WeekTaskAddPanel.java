@@ -112,7 +112,7 @@ public class WeekTaskAddPanel extends JPanel {
 		});
 
 		//課題追加ボタンの操作
-		Taskadd();
+		taskAdd();
 		operationButton.setLayout(layout2);
 		operationButton.add(returnButton);
 		operationButton.add(addButton);
@@ -124,7 +124,7 @@ public class WeekTaskAddPanel extends JPanel {
 	}
 
 	//タスクの追加をするメソッド
-	public void Taskadd() {
+	public void taskAdd() {
 		addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -133,7 +133,7 @@ public class WeekTaskAddPanel extends JPanel {
 				String nameString = nameField.getText();
 				String periodString = periodField.getText();
 				String detailString = detailField.getText();
-				if (!InputCheck(nameString, periodString, detailString)) {
+				if (!inputCheck(nameString, periodString, detailString)) {
 					//曜日を数字に変換
 					int dayOfTheWeek = dayOfTheWeekChange();
 					//毎週課題をweekTaskListに追加する
@@ -141,7 +141,7 @@ public class WeekTaskAddPanel extends JPanel {
 							.add(new WeekTask(nameString, detailString, dayOfTheWeek, Integer.parseInt(periodString)));
 
 					//更新情報をセーブする
-					new SaveData().WeekTaskSave();
+					new SaveData().weekTaskSave();
 
 					//taskListの内容更新
 					JPanel weekTaskListJPanel = new WeekTaskListPanel();
@@ -158,7 +158,7 @@ public class WeekTaskAddPanel extends JPanel {
 	}
 
 	//入力内容が適切かどうか判断するメソッド
-	public boolean InputCheck(String nameString, String periodString, String detailString) {
+	public boolean inputCheck(String nameString, String periodString, String detailString) {
 		boolean result = true;
 		//入力内容が適切かどうか判断
 		StringBuilder stringCheck = new StringBuilder();

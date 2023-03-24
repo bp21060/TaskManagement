@@ -24,7 +24,7 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 
 	//TaskAddを新規追加から現状のものを上書きする形で追加するものに変更
 	@Override
-	public void Taskadd() {
+	public void taskAdd() {
 		addButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -33,7 +33,7 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 				String nameString = nameField.getText();
 				String periodString = periodField.getText();
 				String detailString = detailField.getText();
-				if (!InputCheck(nameString, periodString, detailString)) {
+				if (!inputCheck(nameString, periodString, detailString)) {
 					//曜日を数字に変換
 					int dayOfTheWeek = dayOfTheWeekChange();
 					//更新
@@ -41,7 +41,7 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 							new WeekTask(nameString, detailString, dayOfTheWeek, Integer.parseInt(periodString)));
 
 					//更新情報をセーブする
-					new SaveData().WeekTaskSave();
+					new SaveData().weekTaskSave();
 					//taskListの内容更新
 					JPanel weekTaskListJPanel = new WeekTaskListPanel();
 					TaskManagement.cardLayoutPanel.add(weekTaskListJPanel, "weekTaskList");
