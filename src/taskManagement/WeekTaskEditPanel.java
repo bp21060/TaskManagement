@@ -55,22 +55,22 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 	public String dayOfTheWeekChange(WeekTask weekTask) {
 		String result;
 		switch (weekTask.dayOfWeek) {
-		case 6:
+		case 7:
 			result = "土曜日";
 			break;
-		case 5:
+		case 6:
 			result = "金曜日";
 			break;
-		case 4:
+		case 5:
 			result = "木曜日";
 			break;
-		case 3:
+		case 4:
 			result = "水曜日";
 			break;
-		case 2:
+		case 3:
 			result = "火曜日";
 			break;
-		case 1:
+		case 2:
 			result = "月曜日";
 			break;
 		default:

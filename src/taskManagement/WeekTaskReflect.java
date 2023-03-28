@@ -25,6 +25,9 @@ public class WeekTaskReflect {
 			//対象日の曜日を取得
 			int dayOfWeek = day.get(Calendar.DAY_OF_WEEK);
 
+			//デバック
+			System.out.println(dayOfWeek);
+
 			for (int j = 0; j < TaskManagement.weekTaskList.size(); j++) {
 				WeekTask weekTask = TaskManagement.weekTaskList.get(j);
 				if (dayOfWeek == weekTask.dayOfWeek) {

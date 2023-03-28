@@ -12,9 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
 import javax.swing.border.EtchedBorder;
 
 public class WeekTaskAddPanel extends JPanel {
@@ -93,11 +93,16 @@ public class WeekTaskAddPanel extends JPanel {
 								.addComponent(dayOfTheWeekComboBox)
 								.addComponent(periodField)
 								.addComponent(periodEndLabel))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(detaiLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(detailField)));
+
+		// コンボボックスのドロップダウンリストを最前面に表示するリスナーの設定
+		dayOfTheWeekComboBox.addActionListener(e -> {
+			JComboBox<String> cb = (JComboBox<String>) e.getSource();
+			JPopupMenu popup = (JPopupMenu) cb.getUI().getAccessibleChild(cb, 0);
+		});
 
 		//追加、削除ボタンのパネルを追加
 		JPanel operationButton = new JPanel();
