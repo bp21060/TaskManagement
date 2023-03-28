@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 import javax.swing.border.EtchedBorder;
 
 public class WeekTaskAddPanel extends JPanel {
@@ -92,6 +93,7 @@ public class WeekTaskAddPanel extends JPanel {
 								.addComponent(dayOfTheWeekComboBox)
 								.addComponent(periodField)
 								.addComponent(periodEndLabel))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(detaiLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
@@ -182,26 +184,26 @@ public class WeekTaskAddPanel extends JPanel {
 
 	//曜日を数字に変換するメソッド
 	public int dayOfTheWeekChange() {
-		int result = 0;
+		int result = 1;
 		String dayOfTheWeek = dayOfTheWeekComboBox.getSelectedItem().toString();
 		switch (dayOfTheWeek) {
 		case "土曜日":
-			result = 6;
+			result = 7;
 			break;
 		case "金曜日":
-			result = 5;
+			result = 6;
 			break;
 		case "木曜日":
-			result = 4;
+			result = 5;
 			break;
 		case "水曜日":
-			result = 3;
+			result = 4;
 			break;
 		case "火曜日":
-			result = 2;
+			result = 3;
 			break;
 		case "月曜日":
-			result = 1;
+			result = 2;
 			break;
 		}
 

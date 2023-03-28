@@ -8,7 +8,7 @@ public class WeekTask {
 	String name;
 	String detail;
 	//タスクが自動追加される曜日
-	int dayOfTheWeek;
+	int dayOfWeek;
 	//タスクが自動追加される日から期限までの日にち
 	int period;
 	JLabel label;
@@ -19,7 +19,7 @@ public class WeekTask {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.name = name;
 		this.detail = detail;
-		this.dayOfTheWeek = dayOfTheWeek;
+		this.dayOfWeek = dayOfTheWeek;
 		this.period = period;
 		this.label = new JLabel(name);
 	}

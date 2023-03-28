@@ -1,6 +1,8 @@
 package taskManagement;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Calendar;
 
@@ -9,7 +11,32 @@ public class WeekTaskReflect {
 	public WeekTaskReflect() {
 		// 現在日時と最終使用日を取得
 		Calendar today = Calendar.getInstance();
-		Calendar lastUseDate = getLastUseDate();
+		Calendar day = getLastUseDate();
+
+		//一日進める
+		day.add(Calendar.DATE, 1);
+
+		//繰り返しは30日までしか行わない
+		for (int i = 0; i < 30; i++) {
+			//今日より未来を指していたら終了
+			if (day.after(today)) {
+				break;
+			}
+			//対象日の曜日を取得
+			int dayOfWeek = day.get(Calendar.DAY_OF_WEEK);
+
+			for (int j = 0; j < TaskManagement.weekTaskList.size(); j++) {
+				WeekTask weekTask = TaskManagement.weekTaskList.get(j);
+				if (dayOfWeek == weekTask.dayOfWeek) {
+					//毎週課題を通常課題に変換
+					Calendar deadline = day;
+					deadline.add(Calendar.DATE, weekTask.period);
+					Task task = new Task(weekTask.name, weekTask.detail,
+							deadline.get(Calendar.YEAR), deadline.get(Calendar.MONTH), deadline.get(Calendar.DATE));
+					TaskManagement.taskList.add(task);
+				}
+			}
+		}
 
 		//現在日時を最終使用日に更新
 		setLastUseDate(today);
@@ -19,7 +46,42 @@ public class WeekTaskReflect {
 	public Calendar getLastUseDate() {
 		//最終仕様日(問題があった場合は現在日時を返答するため初期値は現在日時)
 		Calendar lastUseDate = Calendar.getInstance();
+		try {
+			//ファイル読み込み
+			File saveFile = new File("lastUseDate.csv");
 
+			if (saveFile.exists()) {
+				FileReader fileReader = new FileReader(saveFile);
+				BufferedReader bufferedReader = new BufferedReader(fileReader);
+				String content;
+				String[] contentList = new String[3];
+
+				while ((content = bufferedReader.readLine()) != null) {
+					//カンマで分割してそれぞれを摘出する。
+					contentList = content.split(",", 3);
+
+					//期限がしっかりと日時になっているか確認する。
+					for (int i = 0; i < 3; i++) {
+						for (int j = 0; j < contentList[i].length(); j++) {
+							if (!Character.isDigit(contentList[i].charAt(j))) {
+								System.out.println("セーブデータ内に格納されている最終仕様日が数字以外になっています");
+								bufferedReader.close();
+								return Calendar.getInstance();
+							}
+						}
+					}
+				}
+
+				lastUseDate.set(Integer.parseInt(contentList[0]), Integer.parseInt(contentList[0]),
+						Integer.parseInt(contentList[0]));
+
+				bufferedReader.close();
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return lastUseDate;
 	}
 
@@ -38,4 +100,5 @@ public class WeekTaskReflect {
 			e.printStackTrace();
 		}
 	}
+
 }

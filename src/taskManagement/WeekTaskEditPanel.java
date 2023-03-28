@@ -54,7 +54,7 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 	//数字から曜日に変換するメソッド
 	public String dayOfTheWeekChange(WeekTask weekTask) {
 		String result;
-		switch (weekTask.dayOfTheWeek) {
+		switch (weekTask.dayOfWeek) {
 		case 6:
 			result = "土曜日";
 			break;

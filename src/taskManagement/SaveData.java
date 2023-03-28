@@ -40,7 +40,7 @@ public class SaveData {
 			for (int i = 0; i < TaskManagement.weekTaskList.size(); i++) {
 				WeekTask weekTask = TaskManagement.weekTaskList.get(i);
 				fileWriter.write(
-						weekTask.name + "," + weekTask.dayOfTheWeek + "," + weekTask.period + "," + weekTask.detail
+						weekTask.name + "," + weekTask.dayOfWeek + "," + weekTask.period + "," + weekTask.detail
 								+ "\r\n");
 			}
 			fileWriter.close();
@@ -55,6 +55,7 @@ public class SaveData {
 	public void load() {
 		taskLoad();
 		weekTaskLoad();
+		new WeekTaskReflect();
 	}
 
 	//通常課題のロード
@@ -121,7 +122,7 @@ public class SaveData {
 							return;
 						}
 						int i = Integer.valueOf(contentList[1]);
-						if (i < 0 || i > 6) {
+						if (i < 1 || i > 7) {
 							System.out.println("セーブデータ内に格納されている開始曜日が適切な数字ではありません");
 							bufferedReader.close();
 							return;

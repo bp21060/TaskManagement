@@ -43,7 +43,7 @@ public class TaskManagement extends JFrame {
 	 */
 	public TaskManagement() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 400);
 
 		//メイン画面遷移
 		cardLayoutPanel = new JPanel();
