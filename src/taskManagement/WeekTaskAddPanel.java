@@ -194,7 +194,9 @@ public class WeekTaskAddPanel extends JPanel {
 		}
 		if (nameString.contains(",")) {
 			JOptionPane.showMessageDialog(addButton, "タイトルに「,」を含んでいます", "Error", JOptionPane.ERROR_MESSAGE);
-		} else if (!digitCheck) {
+		} else if (nameString.isEmpty()) {
+			JOptionPane.showMessageDialog(addButton, "タイトルが書かれていません", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (!digitCheck || periodString.isEmpty()) {
 			JOptionPane.showMessageDialog(addButton, "期限年月日が適切な数字ではありません", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			result = false;
