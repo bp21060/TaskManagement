@@ -1,18 +1,18 @@
 package taskManagement;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -23,12 +23,21 @@ public class WeekTaskAddPanel extends JPanel {
 	Label nameLabel = new Label("名前");
 	JTextField nameField = new JTextField(15);
 	Label dayOfTheWeekLabel = new Label("開始曜日");
-	JComboBox<String> dayOfTheWeekComboBox = new JComboBox<>();
 	Label periodLabel = new Label("期限");
 	JTextField periodField = new JTextField(2);
 	Label periodEndLabel = new Label("日後");
 	Label detaiLabel = new Label("詳細");
 	JTextArea detailField = new JTextArea(4, 20);
+
+	//ラジオボタン
+	ButtonGroup dayOfWeek = new ButtonGroup();
+	JRadioButton monday = new JRadioButton("月", true);
+	JRadioButton tuseday = new JRadioButton("火");
+	JRadioButton wednesday = new JRadioButton("水");
+	JRadioButton thursday = new JRadioButton("木");
+	JRadioButton friday = new JRadioButton("金");
+	JRadioButton saturday = new JRadioButton("土");
+	JRadioButton sunday = new JRadioButton("日");
 
 	JButton returnButton = new JButton("元に戻る");
 	JButton addButton = new JButton("週間課題追加");
@@ -47,17 +56,14 @@ public class WeekTaskAddPanel extends JPanel {
 		detailField.setLineWrap(true);
 		detailField.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 
-		//ComboBoxに曜日を追加
-		dayOfTheWeekComboBox.addItem("日曜日");
-		dayOfTheWeekComboBox.addItem("月曜日");
-		dayOfTheWeekComboBox.addItem("火曜日");
-		dayOfTheWeekComboBox.addItem("水曜日");
-		dayOfTheWeekComboBox.addItem("木曜日");
-		dayOfTheWeekComboBox.addItem("金曜日");
-		dayOfTheWeekComboBox.addItem("土曜日");
-
-		//テキストボックスの幅設定
-		periodField.setPreferredSize(new Dimension(40, 10));
+		//ボタングループの設定
+		dayOfWeek.add(monday);
+		dayOfWeek.add(tuseday);
+		dayOfWeek.add(wednesday);
+		dayOfWeek.add(thursday);
+		dayOfWeek.add(friday);
+		dayOfWeek.add(saturday);
+		dayOfWeek.add(sunday);
 
 		//水平グループ
 		layout.setHorizontalGroup(
@@ -66,11 +72,16 @@ public class WeekTaskAddPanel extends JPanel {
 								.addComponent(title)
 								.addComponent(nameLabel)
 								.addComponent(nameField)
+								.addComponent(dayOfTheWeekLabel)
 								.addGroup(layout.createSequentialGroup()
-										.addGroup(layout.createParallelGroup()
-												.addComponent(dayOfTheWeekLabel)
-												.addComponent(dayOfTheWeekComboBox))
-										.addGap(10, 10, 10))
+										.addComponent(monday)
+										.addComponent(tuseday)
+										.addComponent(wednesday)
+										.addComponent(thursday)
+										.addComponent(friday)
+										.addComponent(saturday)
+										.addComponent(sunday))
+								.addGap(10, 10, 10)
 								.addGroup(layout.createSequentialGroup()
 										.addComponent(periodLabel)
 										.addComponent(periodField)
@@ -91,7 +102,13 @@ public class WeekTaskAddPanel extends JPanel {
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(dayOfTheWeekLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(dayOfTheWeekComboBox))
+								.addComponent(monday)
+								.addComponent(tuseday)
+								.addComponent(wednesday)
+								.addComponent(thursday)
+								.addComponent(friday)
+								.addComponent(saturday)
+								.addComponent(sunday))
 						.addGap(10, 10, 10)
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(periodLabel)
@@ -155,7 +172,7 @@ public class WeekTaskAddPanel extends JPanel {
 					//記入内容の帳消し
 					nameField.setText("");
 					detailField.setText("");
-					dayOfTheWeekComboBox.setSelectedItem("日曜日");
+					monday.setSelected(true);
 					periodField.setText("");
 				}
 			}
@@ -188,26 +205,18 @@ public class WeekTaskAddPanel extends JPanel {
 	//曜日を数字に変換するメソッド
 	public int dayOfTheWeekChange() {
 		int result = 1;
-		String dayOfTheWeek = dayOfTheWeekComboBox.getSelectedItem().toString();
-		switch (dayOfTheWeek) {
-		case "土曜日":
+		if (saturday.isSelected()) {
 			result = 7;
-			break;
-		case "金曜日":
+		} else if (friday.isSelected()) {
 			result = 6;
-			break;
-		case "木曜日":
+		} else if (thursday.isSelected()) {
 			result = 5;
-			break;
-		case "水曜日":
+		} else if (wednesday.isSelected()) {
 			result = 4;
-			break;
-		case "火曜日":
+		} else if (tuseday.isSelected()) {
 			result = 3;
-			break;
-		case "月曜日":
+		} else if (monday.isSelected()) {
 			result = 2;
-			break;
 		}
 
 		return result;

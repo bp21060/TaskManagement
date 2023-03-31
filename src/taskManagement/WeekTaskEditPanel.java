@@ -16,8 +16,8 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 		this.number = number;
 		title.setText("タスクの編集");
 		nameField.setText(this.task.name);
-		dayOfTheWeekComboBox.setSelectedItem(dayOfTheWeekChange(weekTask));
 		periodField.setText(String.valueOf(this.task.period));
+		setDayOfWeekButton(weekTask);
 		detailField.setText(this.task.detail);
 		addButton.setText("編集完了");
 	}
@@ -52,32 +52,29 @@ public class WeekTaskEditPanel extends WeekTaskAddPanel {
 	}
 
 	//数字から曜日に変換するメソッド
-	public String dayOfTheWeekChange(WeekTask weekTask) {
-		String result;
+	public void setDayOfWeekButton(WeekTask weekTask) {
 		switch (weekTask.dayOfWeek) {
 		case 7:
-			result = "土曜日";
+			saturday.setSelected(true);
 			break;
 		case 6:
-			result = "金曜日";
+			friday.setSelected(true);
 			break;
 		case 5:
-			result = "木曜日";
+			thursday.setSelected(true);
 			break;
 		case 4:
-			result = "水曜日";
+			wednesday.setSelected(true);
 			break;
 		case 3:
-			result = "火曜日";
+			tuseday.setSelected(true);
 			break;
-		case 2:
-			result = "月曜日";
+		case 1:
+			sunday.setSelected(true);
 			break;
 		default:
-			result = "日曜日";
+			monday.setSelected(true);
 		}
-
-		return result;
 	}
 
 }
