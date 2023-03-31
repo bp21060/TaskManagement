@@ -1,6 +1,7 @@
 package taskManagement;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -56,6 +56,9 @@ public class WeekTaskAddPanel extends JPanel {
 		dayOfTheWeekComboBox.addItem("金曜日");
 		dayOfTheWeekComboBox.addItem("土曜日");
 
+		//テキストボックスの幅設定
+		periodField.setPreferredSize(new Dimension(40, 10));
+
 		//水平グループ
 		layout.setHorizontalGroup(
 				layout.createSequentialGroup()
@@ -67,12 +70,11 @@ public class WeekTaskAddPanel extends JPanel {
 										.addGroup(layout.createParallelGroup()
 												.addComponent(dayOfTheWeekLabel)
 												.addComponent(dayOfTheWeekComboBox))
-										.addGap(10, 10, 10)
-										.addGroup(layout.createParallelGroup()
-												.addComponent(periodLabel)
-												.addGroup(layout.createSequentialGroup()
-														.addComponent(periodField)
-														.addComponent(periodEndLabel)))
+										.addGap(10, 10, 10))
+								.addGroup(layout.createSequentialGroup()
+										.addComponent(periodLabel)
+										.addComponent(periodField)
+										.addComponent(periodEndLabel)
 										.addGap(40, 40, 40))
 								.addComponent(detaiLabel)
 								.addComponent(detailField)));
@@ -87,22 +89,18 @@ public class WeekTaskAddPanel extends JPanel {
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(nameField))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(dayOfTheWeekLabel)
-								.addComponent(periodLabel))
+								.addComponent(dayOfTheWeekLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(dayOfTheWeekComboBox)
+								.addComponent(dayOfTheWeekComboBox))
+						.addGap(10, 10, 10)
+						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(periodLabel)
 								.addComponent(periodField)
 								.addComponent(periodEndLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(detaiLabel))
 						.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(detailField)));
-
-		// コンボボックスのドロップダウンリストを最前面に表示するリスナーの設定
-		dayOfTheWeekComboBox.addActionListener(e -> {
-			JComboBox<String> cb = (JComboBox<String>) e.getSource();
-			JPopupMenu popup = (JPopupMenu) cb.getUI().getAccessibleChild(cb, 0);
-		});
 
 		//追加、削除ボタンのパネルを追加
 		JPanel operationButton = new JPanel();

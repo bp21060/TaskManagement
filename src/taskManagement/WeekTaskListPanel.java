@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
@@ -70,7 +71,7 @@ public class WeekTaskListPanel extends TaskListPanel {
 		SequentialGroup vGroup = layout.createSequentialGroup();
 
 		for (int i = 0; i < taskAmount; i++) {
-			ParallelGroup pGroup2 = layout.createParallelGroup();
+			ParallelGroup pGroup2 = layout.createParallelGroup(Alignment.BASELINE);
 			for (int j = 0; j < 3; j++) {
 				pGroup2.addComponent(weekTaskList.get(3 * i + j));
 			}

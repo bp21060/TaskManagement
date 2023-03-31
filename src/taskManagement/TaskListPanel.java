@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
@@ -105,7 +106,7 @@ public class TaskListPanel extends JPanel {
 		SequentialGroup vGroup = layout.createSequentialGroup();
 
 		for (int i = 0; i < taskAmount; i++) {
-			ParallelGroup pGroup2 = layout.createParallelGroup();
+			ParallelGroup pGroup2 = layout.createParallelGroup(Alignment.BASELINE);
 			for (int j = 0; j < 4; j++) {
 				pGroup2.addComponent(taskList.get(4 * i + j));
 			}
