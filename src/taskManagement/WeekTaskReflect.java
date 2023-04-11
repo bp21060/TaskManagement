@@ -13,17 +13,31 @@ public class WeekTaskReflect {
 		Calendar today = Calendar.getInstance();
 		Calendar day = getLastUseDate();
 
-		//一日進める
-		day.add(Calendar.DATE, 1);
+		//現在日を一時間後にする
+		today.add(Calendar.HOUR, 1);
 
 		//繰り返しは30日までしか行わない
 		for (int i = 0; i < 30; i++) {
+			//一日進める
+			day.add(Calendar.DATE, 1);
+
+			//デバック
+			System.out.println("day=" + day.get(Calendar.YEAR) + "," + day.get(Calendar.MONTH) + ","
+					+ day.get(Calendar.DATE) + ",");
+
 			//今日より未来を指していたら終了
 			if (day.after(today)) {
+
+				//デバック
+				System.out.println("終了");
+
 				break;
 			}
 			//対象日の曜日を取得
 			int dayOfWeek = day.get(Calendar.DAY_OF_WEEK);
+
+			//デバック
+			System.out.println(dayOfWeek);
 
 			for (int j = 0; j < TaskManagement.weekTaskList.size(); j++) {
 				WeekTask weekTask = TaskManagement.weekTaskList.get(j);
@@ -34,6 +48,12 @@ public class WeekTaskReflect {
 					Task task = new Task(weekTask.name, weekTask.detail,
 							deadline.get(Calendar.YEAR), deadline.get(Calendar.MONTH), deadline.get(Calendar.DATE));
 					TaskManagement.taskList.add(task);
+
+					//dayの値を元に戻す
+					day.add(Calendar.DATE, -1 * weekTask.period);
+
+					//セーブ
+					new SaveData().taskSave();
 				}
 			}
 		}
@@ -72,8 +92,8 @@ public class WeekTaskReflect {
 					}
 				}
 
-				lastUseDate.set(Integer.parseInt(contentList[0]), Integer.parseInt(contentList[0]),
-						Integer.parseInt(contentList[0]));
+				lastUseDate.set(Integer.parseInt(contentList[0]), Integer.parseInt(contentList[1]),
+						Integer.parseInt(contentList[2]));
 
 				bufferedReader.close();
 
