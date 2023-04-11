@@ -22,14 +22,13 @@ public class WeekTaskReflect {
 			day.add(Calendar.DATE, 1);
 
 			//デバック
-			System.out.println("day=" + day.get(Calendar.YEAR) + "," + day.get(Calendar.MONTH) + ","
-					+ day.get(Calendar.DATE) + ",");
+			//System.out.println("day=" + day.get(Calendar.YEAR) + "," + day.get(Calendar.MONTH) + ","+ day.get(Calendar.DATE) + ",");
 
 			//今日より未来を指していたら終了
 			if (day.after(today)) {
 
 				//デバック
-				System.out.println("終了");
+				//System.out.println("終了");
 
 				break;
 			}
@@ -37,7 +36,7 @@ public class WeekTaskReflect {
 			int dayOfWeek = day.get(Calendar.DAY_OF_WEEK);
 
 			//デバック
-			System.out.println(dayOfWeek);
+			//System.out.println(dayOfWeek);
 
 			for (int j = 0; j < TaskManagement.weekTaskList.size(); j++) {
 				WeekTask weekTask = TaskManagement.weekTaskList.get(j);
