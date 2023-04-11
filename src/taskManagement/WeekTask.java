@@ -1,5 +1,7 @@
 package taskManagement;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -22,5 +24,9 @@ public class WeekTask {
 		this.dayOfWeek = dayOfTheWeek;
 		this.period = period;
 		this.label = new JLabel(name);
+		//詳細がある場合は青色にする
+		if (!this.detail.isEmpty()) {
+			this.label.setForeground(new Color(60, 60, 255));
+		}
 	}
 }

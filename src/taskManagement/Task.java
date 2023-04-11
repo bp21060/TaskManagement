@@ -1,5 +1,6 @@
 package taskManagement;
 
+import java.awt.Color;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -21,6 +22,17 @@ public class Task {
 		this.deadline.set(year, month, day);
 		this.detail = detail;
 		this.label = new JLabel(name);
+
+		//詳細がある場合は青色にする
+		if (!this.detail.isEmpty()) {
+			this.label.setForeground(new Color(60, 60, 255));
+		}
+
+		setDeadline();
+	}
+
+	//残り期限表示メソッド
+	public void setDeadline() {
 		Calendar checkDate = Calendar.getInstance();
 		if (deadline.compareTo(checkDate) > 0) {
 			int timeleft = 0;
