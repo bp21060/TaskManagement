@@ -76,6 +76,13 @@ public class TaskListPanel extends JPanel {
 			taskList.add(task.detailButton);
 			taskList.add(task.completeButton);
 			taskList.add(task.timeleftLabel);
+
+			//今までのdetailボタンの処理を削除する
+			ActionListener[] listeners = task.detailButton.getActionListeners();
+			for (ActionListener listener : listeners) {
+				task.detailButton.removeActionListener(listener);
+			}
+
 			//detailボタンの設定
 			task.detailButton.addActionListener(new ActionListener() {
 				@Override
@@ -143,8 +150,10 @@ public class TaskListPanel extends JPanel {
 					//完了したタスクの削除
 					if (TaskManagement.taskList.get(i).completeButton.isSelected()) {
 						TaskManagement.taskList.remove(i);
+						taskAmount--;
 					}
 				}
+
 				//更新情報をセーブする
 				new SaveData().taskSave();
 
