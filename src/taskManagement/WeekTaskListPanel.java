@@ -41,6 +41,13 @@ public class WeekTaskListPanel extends TaskListPanel {
 			weekTaskList.add(weekTask.label);
 			weekTaskList.add(weekTask.detailButton);
 			weekTaskList.add(weekTask.completeButton);
+
+			//今までのdetailボタンの処理を削除する
+			ActionListener[] listeners = weekTask.detailButton.getActionListeners();
+			for (ActionListener listener : listeners) {
+				weekTask.detailButton.removeActionListener(listener);
+			}
+
 			//detailボタンの設定
 			weekTask.detailButton.addActionListener(new ActionListener() {
 				@Override
