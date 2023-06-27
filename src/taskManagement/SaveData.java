@@ -18,6 +18,16 @@ public class SaveData {
 			//セーブデータの内容書き込み
 			for (int i = 0; i < TaskManagement.taskList.size(); i++) {
 				Task task = TaskManagement.taskList.get(i);
+
+				//デバック
+				System.out.println("改行修正前" + task.detail);
+
+				//詳細に改行あったらそれを置き換える
+				task.detail = task.detail.replaceAll("\\r\n|\\r|\\n", "/改行/");
+
+				//デバック
+				System.out.println("改行修正後" + task.detail);
+
 				fileWriter.write(
 						task.name + "," + task.deadline.get(Calendar.YEAR) + "," + task.deadline.get(Calendar.MONTH)
 								+ "," + task.deadline.get(Calendar.DATE) + "," + task.detail + "\r\n");
@@ -39,6 +49,10 @@ public class SaveData {
 			//セーブデータの内容書き込み
 			for (int i = 0; i < TaskManagement.weekTaskList.size(); i++) {
 				WeekTask weekTask = TaskManagement.weekTaskList.get(i);
+
+				//詳細に改行あったらそれを置き換える
+				weekTask.detail = weekTask.detail.replaceAll("\\r\\n|\\r|\\n", "/改行/");
+
 				fileWriter.write(
 						weekTask.name + "," + weekTask.dayOfWeek + "," + weekTask.period + "," + weekTask.detail
 								+ "\r\n");
@@ -84,6 +98,9 @@ public class SaveData {
 							}
 						}
 					}
+
+					//詳細の改行を元に戻す
+					contentList[4] = contentList[4].replace("/改行/", "\r\n");
 
 					Task task = new Task(contentList[0], contentList[4], Integer.parseInt(contentList[1]),
 							Integer.parseInt(contentList[2]), Integer.parseInt(contentList[3]));
@@ -137,6 +154,9 @@ public class SaveData {
 							return;
 						}
 					}
+
+					//詳細の改行を元に戻す
+					contentList[3] = contentList[3].replace("/改行/", "\r\n");
 
 					WeekTask weekTask = new WeekTask(contentList[0], contentList[3], Integer.parseInt(contentList[1]),
 							Integer.parseInt(contentList[2]));
